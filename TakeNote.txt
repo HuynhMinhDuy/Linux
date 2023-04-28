@@ -1,0 +1,81 @@
+- Install ssh :
+    sudo yum –y install openssh-server openssh-clients
+    sudo systemctl start sshd
+  
+- List all process :
+    ps aux
+
+- List rpm package :
+    sudo yum list installed | grep abc
+    rpm -qa | grep abc
+ 
+ - Install rpm :
+	  sudo rpm -i sample_file.rpm	
+  
+  - Remove rpm package:
+    sudo rpm -e util-linux
+    yum remove console.x86_64
+   
+  - Hard link , soft link :
+	  ln -s /tmp/test.log /root/t.log [ the content of t.log is the same as test.log]
+   
+   -------------- CA cert ------------------
+   
+    1. Generate CA's privete key and self-signed certificate :
+
+      openssl req -x509 -newkey rsa:4096 -days 365 -keyout ca-key.pem -out ca-cert.pem
+      -> Or openssl req -x509 -newkey rsa:4096 -days 365 -keyout ca-key.pem -out ca-cert.pem -subj "/C=US/ST=Florida/L=Tampa/O=OPSWAT/OU=OPSWAT_UNIT/CN=OPSWAT RADIUS CA/emailAddress=admin@opswat.com"
+
+      openssl x509 -in ca-cert.pem -noout -text --> show information about signature
+
+      [.pem -----BEGIN CERTIFICATE----- --> information about signature]
+
+  2. Generate web server's private key and cerificate signing request(CSR)
+      openssl req -newkey rsa:4096 -keyout server-key.pem -out server-req.pem -subj "/C=UK/ST=London/L=London/O=OPSWAT_UK/OU=OPSWAT_UNIT_UK/CN=OPSWAT RADIUS CA UK/emailAddress=admin_uk@opswat.com"
+
+  3. Use CA's private key to sign web server's CSR and get back the signed certificate
+      openssl x509 -req -in server-req.pem -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -out server-cert.pem 
+
+  4. Check certificate :
+      openssl verify -CAfile ca-cert.pem server-cert.pem
+  
+  
+  openssl req -new -x509 -keyout ca.key -out ca.pem -days '60' -config ./ca.cnf -passin pass:"whatever" -passout pass:"whatever"	
+	openssl req -new  -out client.csr -keyout client.key -config ./client.cnf
+	openssl x509 -req -in client.csr -CA ca.pem -CAkey ca.pem -CAcreateserial -out client-cert.pem 
+	openssl ca -batch -keyfile ca.key -cert ca.pem -in client.csr  -key "whatever" -out client.crt -extensions xpclient_ext -extfile xpextensions -config ./client.cnf
+	
+  ------------------------------------------------------------------
+  
+  - Print env : 
+	  printenv | grep SERVER
+	
+sudo mkdir /project
+sudo chown $USER:$USER /project
+
+Copy file :
+    scp root@10.11.22.33:/home/Management/repository.bak.tar.gz /root
+ 
+ Set hostname :
+	  hostnamectl set-hostname worker2
+	
+Update yum : 
+	  sudo yum -y update && sudo systemctl reboot
+    
+ Check os version :
+	  cat /etc/os-release
+ 
+ Docker linux :
+    ps aux | grep docker
+    sudo service docker start
+
+Check diskspace ubuntu/linux :
+	du -sh /*/
+	sudo du -sh */
+	
+List all running process:
+	ps -elf
+
+
+    
+  
