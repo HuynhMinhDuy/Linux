@@ -70,6 +70,7 @@ Update yum :
     sudo service docker start
 
 Check diskspace ubuntu/linux :
+	du -sh .
 	du -sh /*/
 	sudo du -sh */
 	
