@@ -77,6 +77,11 @@ Check diskspace ubuntu/linux :
 List all running process:
 	ps -elf
 
+Restart machine : 
+	init 6
+
+
+
 
     
   
