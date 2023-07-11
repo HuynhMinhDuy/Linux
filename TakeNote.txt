@@ -80,7 +80,12 @@ List all running process:
 Restart machine : 
 	init 6
 
+Update DB folder:
+	updatedb
 
+Find files :
+	locate
+	
 
 
     
