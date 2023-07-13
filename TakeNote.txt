@@ -72,7 +72,7 @@ Update yum :
 Check diskspace ubuntu/linux :
 	du -sh .
 	du -sh /*/
-	sudo du -sh */
+	sudo du -sh */  --> show storge all current folders
 	
 List all running process:
 	ps -elf
@@ -85,6 +85,8 @@ Update DB folder:
 
 Find files :
 	locate
+Show date:
+	date
 	
 
 
