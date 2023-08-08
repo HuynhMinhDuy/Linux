@@ -88,6 +88,9 @@ Find files :
 Show date:
 	date
 	
+Check listening port:
+	netstat -nl | grep 61616
+
 
 
     
